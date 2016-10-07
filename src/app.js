@@ -32,8 +32,8 @@ for(var i = 0; i < 10; i++) {
   }
 }
 
-startPipe = pipes.push(new Pipe("horizontal", {x:0, y:0} ));
-endPipe = pipes.push(new Pipe("end", {x :800, y:400} ));
+//startPipe = pipes.push(new Pipe("horizontal", {x:0, y:0} ));
+//endPipe = pipes.push(new Pipe("end", {x :640, y:640} ));
 
 canvas.onclick = function(event) {
   event.preventDefault();

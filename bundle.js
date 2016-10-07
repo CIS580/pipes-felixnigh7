@@ -15,17 +15,26 @@ background.src = 'assets/background.png';
 var score = 0;
 var level= 0;
 var board = [];
+var pipes = [];
+var water = [];
+var startPipe;
+var endPipe;
+var x = 0;
+var y = 0;
+
 //var pipes[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 //var board[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 for (var i = 0; i < 10; i++) {
   board[i] = [];
 }
-
 for(var i = 0; i < 10; i++) {
   for(var j = 0; j < 10; j++) {
     board[i][j] = false;
   }
 }
+
+//startPipe = pipes.push(new Pipe("horizontal", {x:0, y:0} ));
+//endPipe = pipes.push(new Pipe("end", {x :640, y:640} ));
 
 canvas.onclick = function(event) {
   event.preventDefault();
@@ -88,6 +97,7 @@ function render(elapsedTime, ctx) {
  * @module exports the Game class
  */
 module.exports = exports = Game;
+
 
 /**
  * @constructor Game

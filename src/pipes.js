@@ -48,7 +48,7 @@ Pipe.prototype.update = function(elapsedTime) {
  * {DOMHighResTimeStamp} time the elapsed time since the last frame
  * {CanvasRenderingContext2D} ctx the context to render into
  */
- Pipe.prototype.render = function(time, ctx) {
+ Pipe.prototype.render = function(elapsedTimetime, ctx) {
 	ctx.drawImage(
     // image
     this.spritesheet,

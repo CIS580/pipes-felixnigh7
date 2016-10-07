@@ -3,19 +3,34 @@
 
 /* Classes */
 const Game = require('./game');
+const Pipe = require('./pipes.js');
 
 /* Global variables */
 var canvas = document.getElementById('screen');
 var game = new Game(canvas, update, render);
 var image = new Image();
 image.src = 'assets/pipes.png';
+var background = new Image();
+background.src = 'assets/background.png';
+var score = 0;
+var level= 0;
+var board = [];
+//var pipes[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+//var board[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+for (var i = 0; i < 10; i++) {
+  board[i] = [];
+}
 
-// TODO: Place the pipe tiles on the board in random order
+for(var i = 0; i < 10; i++) {
+  for(var j = 0; j < 10; j++) {
+    board[i][j] = false;
+  }
+}
 
 canvas.onclick = function(event) {
   event.preventDefault();
-  // TODO: determine which pipe tile was clicked on
-  // TODO: rotate the pipes in the pipe tile
+  // TODO: Place or rotate pipe tile
+
 }
 
 /**
@@ -55,10 +70,18 @@ function render(elapsedTime, ctx) {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // TODO: Render the board
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "black";
+  ctx.font = "bold 16px Arial";
+  ctx.fillText("Level: " + level, 850, 200);
+  ctx.fillStyle = "black";
+  ctx.font = "bold 16px Arial";
+  ctx.fillText("Score: " + score, 850, 230);
 
 }
 
-},{"./game":2}],2:[function(require,module,exports){
+},{"./game":2,"./pipes.js":3}],2:[function(require,module,exports){
 "use strict";
 
 /**
@@ -114,6 +137,69 @@ Game.prototype.loop = function(newTime) {
 
   // Flip the back buffer
   this.frontCtx.drawImage(this.backBuffer, 0, 0);
+}
+
+},{}],3:[function(require,module,exports){
+"use strict";
+
+/**
+ * @module exports the Pipe class
+ */
+module.exports = exports = Pipe;
+
+function pipes(position, pipeType) {
+this.x = position.x;
+this.y = position.y;
+this.width = 64;
+this.height = 64;
+this.spritesheet  = new Image();
+this.pipeType = pipeType;
+
+  switch(pipeType) {
+      case 0:
+        this.spritesheet.src = encodeURI('assets/leftBottomPipe.png');
+        break;
+      case 1:
+        this.spritesheet.src = encodeURI('assets/leftTopPipe.png');
+        break;
+      case 2:
+        this.spritesheet.src = encodeURI('assets/rightBottomPipe.png');
+        break;
+      case 3:
+        this.spritesheet.src = encodeURI('assets/rightTopPipe.png');
+        break;
+      case 4:
+        this.spritesheet.src = encodeURI('assets/leftRightPipe.png');
+        break;
+      case 5:
+        this.spritesheet.src = encodeURI('assets/topBottomPipe.png');
+        break;
+    }
+}
+
+/**
+ * @function updates the player object
+ * {DOMHighResTimeStamp} time the elapsed time since the last frame
+*/
+Pipe.prototype.update = function(elapsedTime) {
+
+}
+
+/**
+ * @function renders the pip into the provided context
+ * {DOMHighResTimeStamp} time the elapsed time since the last frame
+ * {CanvasRenderingContext2D} ctx the context to render into
+ */
+ Pipe.prototype.render = function(time, ctx) {
+	ctx.drawImage(
+    // image
+    this.spritesheet,
+    // source rectangle
+    0, 0, this.width*2, this.height*2,
+    // destination rectangle
+    this.x, this.y, this.width*2, this.height*2
+  );
+  //need to check if full of water.
 }
 
 },{}]},{},[1]);
